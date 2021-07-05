@@ -11,7 +11,8 @@ contract SystemRoles is Context, AccessControlEnumerable {
     bytes32 public constant TOKEN_SPEND_OPERATOR_ROLE = keccak256("TOKEN_SPEND_OPERATOR_ROLE");
 
     constructor() {
-        super.grantRole(ADMIN_ROLE, _msgSender());
+        _setRoleAdmin(DEFAULT_ADMIN_ROLE, ADMIN_ROLE);
+        _setupRole(ADMIN_ROLE, _msgSender());
     }
 
     function grantRole(bytes32 role, address account)
@@ -19,7 +20,7 @@ contract SystemRoles is Context, AccessControlEnumerable {
         override(AccessControlEnumerable)
         onlyRole(ADMIN_ROLE)
     {
-        super.grantRole(role, account);
+        _setupRole(role, account);
     }
 
     /**
@@ -31,15 +32,5 @@ contract SystemRoles is Context, AccessControlEnumerable {
         onlyRole(ADMIN_ROLE)
     {
         super.revokeRole(role, account);
-    }
-
-    /**
-     * @dev Overload {renounceRole} to track enumerable memberships
-     */
-    function renounceRole(bytes32 role, address account)
-        public
-        override(AccessControlEnumerable)
-    {
-        super.renounceRole(role, account);
     }
 }
