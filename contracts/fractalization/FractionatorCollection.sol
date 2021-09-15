@@ -30,7 +30,7 @@ contract FractionatorCollection is Context {
         fraction = _fractionToken;
     }
 
-    function split(
+    function fract(
         Token[] calldata _tokens,
         uint256 _shares
     )

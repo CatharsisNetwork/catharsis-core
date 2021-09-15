@@ -1,6 +1,6 @@
 {
-  "name": "@catharsis-network/core",
-  "description": "Looking at https://catharsis.network",
+  "name": "catarsis-network-contracts",
+  "description": "catarsis.network",
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.2",
     "@nomiclabs/hardhat-waffle": "^2.0.1",

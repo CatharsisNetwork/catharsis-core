@@ -24,7 +24,7 @@ contract FractionatorERC1155 is Context {
         fraction = _fractionToken;
     }
 
-    function split(
+    function fract(
         IERC1155 _token,
         uint256 _tokenId,
         uint256 _amount,
@@ -52,7 +52,7 @@ contract FractionatorERC1155 is Context {
         fTokenId = fraction.mint(_msgSender(), uint256(fraction.decimals()), _data);
     }
 
-    function splitBatch(
+    function fractBatch(
         Token[] calldata _tokens
     )
         external

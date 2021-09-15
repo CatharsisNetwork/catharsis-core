@@ -7,10 +7,9 @@ import { Ownable } from "@openzeppelin/contracts/access/Ownable.sol";
 import { IFractionalToken } from "../interfaces/IFractionalToken.sol";
 import { ICatharsisCore } from "../interfaces/ICatharsisCore.sol";
 import { IFractionalizable } from "../interfaces/IFractionalizable.sol";
-import "../libs/FractStructs.sol";
+import { FractStructs } from "../libs/FractStructs.sol";
 
-
-contract FractionatorERC721 is Context, Ownable {
+contract WrapERC721 is Context, Ownable {
 
     struct Token {
         IERC721 token;
@@ -28,7 +27,7 @@ contract FractionatorERC721 is Context, Ownable {
         fraction = _fractionToken;
     }
 
-    function split(
+    function fract(
         IERC721 _token,
         uint256 _tokenId,
         uint256 _shares,
@@ -42,7 +41,6 @@ contract FractionatorERC721 is Context, Ownable {
             _shares > 0,
             "Core: wrong shares amount"
         );
-
         require(
             _token.isApprovedForAll(_msgSender(), address(this)),
             "Wrapper ERC721: Token not approved"
@@ -52,7 +50,8 @@ contract FractionatorERC721 is Context, Ownable {
             "Wrapper ERC721: Not token holder"
         );
 
-        IFractionalizable(ICatharsisCore(catharsisCore).fractionalizable()).spendTokens(
+        address fractionalizable = ICatharsisCore(catharsisCore).fractionalizable();
+        IFractionalizable(fractionalizable).spendTokens(
             address(_token),
             _tokenId,
             0
@@ -64,7 +63,7 @@ contract FractionatorERC721 is Context, Ownable {
     }
 
     // todo: issue fraction from different tokens
-    function splitBatch(Token[] calldata _tokens)
+    function fractBatch(Token[] calldata _tokens)
         external
         returns (uint256[] memory fTokenId)
     {

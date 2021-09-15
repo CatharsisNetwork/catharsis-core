@@ -1,1 +1,1 @@
-# catharsis-core
+# contracts

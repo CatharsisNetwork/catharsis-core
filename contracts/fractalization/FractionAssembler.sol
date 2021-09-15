@@ -14,7 +14,7 @@ contract FractionAssembler is Context {
         fraction = _fractionToken;
     }
 
-    function collect(uint256 _fTokenId, uint256 _shares) external {
+    function defract(uint256 _fTokenId, uint256 _shares) external {
         require(
             IFractionalToken(fraction).isApprovedForAll(_msgSender(), address(this)),
             "Fraction token: Fraction token not approved"
@@ -24,12 +24,10 @@ contract FractionAssembler is Context {
             "Fraction token: Not enough fraction token balance"
         );
 
-//        if (_shares == IFractionalToken(fraction).)
-
         fraction.burn(_msgSender(), _fTokenId, _shares);
     }
 
-    function collectBatch(uint256[] calldata _fTokenId, uint256[] calldata _shares) external {
+    function defractBatch(uint256[] calldata _fTokenId, uint256[] calldata _shares) external {
         uint len = _fTokenId.length;
 
         require(
