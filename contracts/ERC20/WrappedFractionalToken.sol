@@ -23,6 +23,7 @@ contract WrappedFractionalToken is ERC20("Catharsis ERC20 Wrapped Token", "CATH2
     // @dev Wrap ERC1155 to ERC20 token
     // Need {FractionalToken.setApprovalForAll} call before.
     function wrap(
+        uint256 _tokenId,
         uint256 _amount,
         address _recipient
     ) external {
@@ -32,6 +33,7 @@ contract WrappedFractionalToken is ERC20("Catharsis ERC20 Wrapped Token", "CATH2
 
     // @dev Wrap ERC1155 from ERC20 token
     function unwrap(
+        uint256 _tokenId,
         uint256 _amount,
         address _recipient
     ) external {

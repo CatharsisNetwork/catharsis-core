@@ -9,7 +9,7 @@ import { ICatharsisCore } from "../interfaces/ICatharsisCore.sol";
 import { IFractionalizable } from "../interfaces/IFractionalizable.sol";
 import { FractStructs } from "../libs/FractStructs.sol";
 
-contract WrapERC721 is Context, Ownable {
+contract FractionatorERC721 is Context, Ownable {
 
     struct Token {
         IERC721 token;

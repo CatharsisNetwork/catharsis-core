@@ -3,9 +3,9 @@ pragma solidity ^0.8.4;
 import { Context } from "@openzeppelin/contracts/utils/Context.sol";
 import { FractionalToken } from "./FractionalToken.sol";
 import { Fractionalizable } from "./management/Fractionalizable.sol";
-import { Unwrapper } from "./fractalization/FractionAssembler.sol";
-import { WrapERC721 } from "./fractalization/FractionatorERC721.sol";
-import { WrapERC1155 } from "./fractalization/FractionatorERC1155.sol";
+import { FractionAssembler } from "./fractalization/FractionAssembler.sol";
+import { FractionatorERC721 } from "./fractalization/FractionatorERC721.sol";
+import { FractionatorERC1155 } from "./fractalization/FractionatorERC1155.sol";
 import { IFractionalToken } from "./interfaces/IFractionalToken.sol";
 
 // @dev Core contract
@@ -28,9 +28,9 @@ contract CatharsisCore is Context {
 
         fraction = address(new FractionalToken("https://api.catarsis.network/token/{id}.json"));
         fractionalizable = address(new Fractionalizable());
-        unwrapper = address(new Unwrapper(IFractionalToken(fraction)));
-        fractionsInterface721 = address(new WrapERC721(IFractionalToken(fraction)));
-        fractionsInterface1155 = address(new WrapERC1155(IFractionalToken(fraction)));
+        unwrapper = address(new FractionAssembler(IFractionalToken(fraction)));
+        fractionsInterface721 = address(new FractionatorERC721(IFractionalToken(fraction)));
+        fractionsInterface1155 = address(new FractionatorERC1155(IFractionalToken(fraction)));
 
         emit GovernanceChanged(_gov);
     }
